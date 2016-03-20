@@ -30,7 +30,7 @@ foreach ($EXCLUDE_HOST as $value) {
 //$ex_checkが1になったら処理とめる
     if ($ex_check > 0) {break;}
 //アドレスのパターンパッチ開始
-    if (preg_match("/$value/", $REMOTE_HOST)) {
+    if (preg_match("/$value/i", $REMOTE_HOST)) {
         $ex_check++;
     }
 }
@@ -42,7 +42,7 @@ foreach ($EXCLUDE_USER_AGENT as $value) {
 //$ex_checkが1になったら処理とめる
     if ($ex_check > 0) {break;}
 //アドレスのパターンパッチ開始
-    if (preg_match("/$value/", $HTTP_USER_AGENT)) {
+    if (preg_match("/$value/i", $HTTP_USER_AGENT)) {
         $ex_check++;
     }
 }
