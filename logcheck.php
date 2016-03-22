@@ -27,7 +27,7 @@ li {
   <h1>LogCheck</h1>
 <?php
 
-require_once "access_init.php";
+require_once 'access_init.php';
 
 if (isset($_GET['log'])) {
     $preflog  = $_GET["log"];
@@ -53,7 +53,8 @@ if (isset($_GET['log'])) {
         <td>DateTime </td>
         <td>IP</td>
         <td>Request</td>
-        <td>Referer<br>UserAgent</td>
+        <td>Referer
+          <br>UserAgent</td>
       </tr>
 <?php
 echo $open_htm;
@@ -79,7 +80,7 @@ foreach ($dirscan as $loglink) {
     }
 }
 ?>
-<?=$templog?>
+        <?=$templog?>
     </ul>
     <div style="clear: both;"></div>
     <hr style="margin: 20px 0">

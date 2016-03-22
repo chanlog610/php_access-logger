@@ -1,6 +1,6 @@
 <?php
+require_once 'access_init.php';
 
-require_once "access_init.php";
 
 //チェック用
 $ex_check = 0;
@@ -19,12 +19,12 @@ foreach ($EXCLUDE_IP as $value) {
 
 //アクセスしてきたホスト
 $REMOTE_HOST = $_SERVER["REMOTE_HOST"];
+if (empty($REMOTE_HOST)) {
+    $REMOTE_HOST = gethostbyaddr($_SERVER['REMOTE_ADDR']);
     if (empty($REMOTE_HOST)) {
-        $REMOTE_HOST = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        if (empty($REMOTE_HOST)) {
-            $REMOTE_HOST = $REMOTE_ADDR;
-        }
+        $REMOTE_HOST = $REMOTE_ADDR;
     }
+}
 //foreachでぶん回す(ホスト)
 foreach ($EXCLUDE_HOST as $value) {
 //$ex_checkが1になったら処理とめる
@@ -47,7 +47,6 @@ foreach ($EXCLUDE_USER_AGENT as $value) {
     }
 }
 
-
 //$ex_checkが0ならアクセスログゲット
 if ($ex_check == 0) {
 
@@ -61,6 +60,7 @@ if ($ex_check == 0) {
     $SCRIPT_FILENAME = $_SERVER["SCRIPT_FILENAME"];
     $REQUEST_URI     = $_SERVER["REQUEST_URI"];
 
+    $apacheaddress　 = "";
 //apacheもどきのデータで記録するアドレス(IP=0 ホスト名=1)
     if ($ip_or_host == 0) {
         $apacheaddress = $REMOTE_ADDR;
