@@ -74,11 +74,13 @@ if (isset($_POST['send'])) {
             $init_output .= preg_replace('/(^\$EXCLUDE_HOST = array).*;/', "$1$replace_EXCLUDE_HOST;", $init_value) . "\n";
         } elseif (preg_match('/^\$EXCLUDE_USER_AGENT = .*;/', $init_value)) {
             $init_output .= preg_replace('/(^\$EXCLUDE_USER_AGENT = array).*;/', "$1$replace_EXCLUDE_USER_AGENT;", $init_value) . "\n";
+        } elseif (preg_match('/^\?\>/', $init_value)) {
+            $init_output .= "?>";
         } else {
             $init_output .= $init_value . "\n";
         }
     }
-// 配列を改行し書き込む
+// 書き込む
     file_put_contents("access_init.php", $init_output);
 }
 ?>
@@ -109,8 +111,7 @@ td {
   <hr style="margin: 20px 0"> 各ページに以下のコードを挿入してください
   <br>
   <span style="border: solid 1px #ccc;margin: 10px;padding: 5px;">
-&lt;?php require_once $_SERVER['DOCUMENT_ROOT'].<?=$target_php?>;
-?&gt;
+&lt;?php require_once $_SERVER['DOCUMENT_ROOT'].<?=$target_php?>; ?&gt;
 </span>
   <form method="post" id="form" action="" style="margin-top: 20px;">
     <table>
