@@ -39,9 +39,8 @@ if ($ip_or_host == 1) {
     $checked_host = "checked";
 }
 
-
 // POSTを取得したら実行
-if (isset($_POST['send'])) {
+if ($_POST['send'] == "send") {
 
 // 設定ファイル読み込み
     $open_init = file_get_contents("access_init.php");
@@ -82,6 +81,9 @@ if (isset($_POST['send'])) {
     }
 // 書き込む
     file_put_contents("access_init.php", $init_output);
+    echo '<script type="text/javascript">
+          location.href = "access_thanks.php";
+          </script>';
 }
 ?>
 <!DOCTYPE html>
@@ -166,9 +168,6 @@ td {
     <input type="hidden" name="send" value="send">
     <div style="text-align: center;margin: 10px auto;">
       <input type="submit" value="保存">
-      <a href="javascript:location.reload(true);" style="text-decoration: none;">
-        <input type="button" value="結果を反映させる">
-      </a>
     </div>
   </form>
 </body>
